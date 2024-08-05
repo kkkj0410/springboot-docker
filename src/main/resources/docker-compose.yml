@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+    expose:
+      - 8080
+    network_mode: "host"
+    volumes:
+      - ./build/libs/:/backend/
+    restart: always
+    stdin_open: true
+    tty: true
