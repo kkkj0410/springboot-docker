@@ -1,66 +1,66 @@
-#version: '3'
-
-#services:
-#  backend:
-#    build:
-#      context: .
-#      dockerfile: ./backend/Dockerfile
-#    expose:
-#      - 8080
-#    network_mode: "host"
-#    volumes:
-#      - ./build/libs/:/backend/
-#    restart: always
-#    stdin_open: true
-#    tty: true
-
-#services:
-#  app:
-#    build:
-#      context: .
-#      args:
-#        - DEV=true
-#    ports:
-#      - '8000:8000'
-#    volumes:
-#      - ./app:/app
+##version: '3'
+#
+##services:
+##  backend:
+##    build:
+##      context: .
+##      dockerfile: ./backend/Dockerfile
+##    expose:
+##      - 8080
+##    network_mode: "host"
+##    volumes:
+##      - ./build/libs/:/backend/
+##    restart: always
+##    stdin_open: true
+##    tty: true
+#
+##services:
+##  app:
+##    build:
+##      context: .
+##      args:
+##        - DEV=true
+##    ports:
+##      - '8000:8000'
+##    volumes:
+##      - ./app:/app
+##
+##
+##  backend:
+##    build:
+##      context: .
+##      dockerfile: ./backend/Dockerfile
+##    expose:
+##      - 8080
+##    network_mode: "host"
+##    volumes:
+##      - ./build/libs/:/backend/
+##    restart: always
+##    stdin_open: true
+##    tty: true
+#
+##services:
+##  backend:
+##    build:
+##      context: .
+##      dockerfile: ./backend/Dockerfile
+##    ports:
+##      - "8080:8080"
+##    networks:
+##      - my_network
+##    volumes:
+##      - ./build/libs/:/backend/
+##    restart: always
+##    stdin_open: true
+##    tty: true
+##
+##networks:
+##  my_network:
+##    driver: bridge
 #
 #
-#  backend:
-#    build:
-#      context: .
-#      dockerfile: ./backend/Dockerfile
-#    expose:
-#      - 8080
-#    network_mode: "host"
-#    volumes:
-#      - ./build/libs/:/backend/
-#    restart: always
-#    stdin_open: true
-#    tty: true
-
-#services:
-#  backend:
-#    build:
-#      context: .
-#      dockerfile: ./backend/Dockerfile
-#    ports:
-#      - "8080:8080"
-#    networks:
-#      - my_network
-#    volumes:
-#      - ./build/libs/:/backend/
-#    restart: always
-#    stdin_open: true
-#    tty: true
 #
-#networks:
-#  my_network:
-#    driver: bridge
-
-
-
-
+#
 version: '3'
 
 services:
@@ -71,14 +71,14 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: spring
-      MYSQL_USER: root
+      MYSQL_DATABASE: test
+      MYSQL_USER: test_user
       MYSQL_PASSWORD: 1234
     networks:
       - springboot-mysql
 
   server:
-    image: demo-test:0.0.1
+    image: mysql
     ports:
       - "8080:8080"
     restart: always
@@ -93,3 +93,27 @@ services:
 
 networks:
   springboot-mysql:
+
+
+
+
+
+#version: "3.7" # 파일 규격 버전
+#services: # 이 항목 밑에 실행하려는 컨테이너 들을 정의 ( 컴포즈에서 컨테이너 : 서비스 )
+#  db: # 서비스 명
+#    image: mysql:latest # 사용할 이미지
+#    restart: always
+#    command: --lower_case_table_names=1
+#    container_name: mysql-dev # 컨테이너 이름 설정
+#    ports:
+#      - "3307:3306" # 접근 포트 설정 (컨테이너 외부:컨테이너 내부)  <- 컨테이너 내부는 무조건 3306
+#    environment: # -e 옵션
+#      - MYSQL_DATABASE=my_dev
+#      - MYSQL_ROOT_PASSWORD=input_password  # MYSQL 패스워드 설정 옵션
+#      - TZ=Asia/Seoul
+#
+#    command: # 명령어 실행
+#      - --character-set-server=utf8mb4
+#      - --collation-server=utf8mb4_unicode_ci
+#    volumes:
+#      - /Users/Shared/data/mysql-dev:/var/lib/mysql # -v 옵션 (다렉토리 마운트 설정)
