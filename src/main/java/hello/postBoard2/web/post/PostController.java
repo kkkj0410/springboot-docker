@@ -5,6 +5,7 @@ import hello.postBoard2.domain.member.Member;
 import hello.postBoard2.domain.member.MemberRepository;
 import hello.postBoard2.domain.post.Post;
 import hello.postBoard2.domain.post.PostRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
+@RequestMapping("/post")
 @Controller
 public class PostController {
 
@@ -24,14 +26,34 @@ public class PostController {
     @Autowired
     PostRepository postRepository;
 
+//    @GetMapping("/your-endpoint")
+//    public ResponseEntity<?> yourMethod(HttpServletRequest request) {
+//        String authHeader = request.getHeader("Authorization");
+//        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+//            String token = authHeader.substring(7); // "Bearer " 문자열 제거
+//            // 이제 token을 검증하고 처리할 수 있습니다.
+//        }
+//        // 기타 처리
+//    }
+
+
+
     @GetMapping("/post-form")
     public String postForm(
             @SessionAttribute(name = SessionConst.LOG_KEY, required = false) Member loginMember,
-            Model model)
+            Model model,
+            HttpServletRequest request)
     {
-        if(loginMember == null){
-            return "redirect:/";
+//        if(loginMember == null){
+//            log.info("post-form 접근 불가 : login 정보 없음");
+//            return "redirect:/";
+//        }
+        String authHeader = request.getHeader("Authorization");
+        if(authHeader != null && authHeader.startsWith("Bearer ")){
+            String jwtToken = authHeader.substring(7);
+            log.info("PostController : jwtToken = {}", jwtToken);
         }
+
 
         Post post = new Post();
         post.setMember(loginMember);
@@ -59,9 +81,17 @@ public class PostController {
     @GetMapping("/postList-form")
     public String postListForm(
             @SessionAttribute(name = SessionConst.LOG_KEY, required = false) Member loginMember,
-            Model model){
-        if(loginMember == null){
-            return "redirect:/";
+            Model model,
+            HttpServletRequest request){
+//        if(loginMember == null){
+//            log.info("postList-form 접근 불가 : login 정보 없음");
+//            return "redirect:/";
+//        }
+
+        String authHeader = request.getHeader("Authorization");
+        if(authHeader != null && authHeader.startsWith("Bearer ")){
+            String jwtToken = authHeader.substring(7);
+            log.info("PostController : jwtToken = {}", jwtToken);
         }
 
         List<Post> postList = postRepository.findPostByMember(loginMember);

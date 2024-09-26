@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   mysqldb:
-    image: mysql:8.0.32
+    image: mysql
     restart: always
     environment:
       MYSQL_DATABASE: yogoyogu

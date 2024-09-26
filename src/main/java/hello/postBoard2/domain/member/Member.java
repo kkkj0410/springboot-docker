@@ -23,12 +23,38 @@ public class Member {
     //@NotEmpty
     private String name;
 
+    private String email;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    private String provider;
+    //private String providerId;
+
     @OneToMany(mappedBy = "member")
     private List<Post> posts;
 
-    public Member() {
+    public Member(){
+
     }
 
+    public Member(String loginId, String name, String email, String provider, Role role) {
+        this.loginId = loginId;
+        this.name = name;
+        this.email = email;
+        this.provider = provider;
+        this.role = role;
+    }
+
+//    public Member(String loginId, String name, String email, String role, String provider, String providerId) {
+//        this.loginId = loginId;
+//        this.name = name;
+//        this.email = email;
+//        this.role = role;
+//        this.provider = provider;
+//        this.providerId = providerId;
+//    }
+//
     public Member(String loginId, String name) {
         this.loginId = loginId;
         this.name = name;
@@ -57,5 +83,16 @@ public class Member {
     @Override
     public int hashCode() {
         return Objects.hash(id, loginId, name);
+    }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "loginId='" + loginId + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", provider='" + provider + '\'' +
+                '}';
     }
 }

@@ -2,14 +2,25 @@ server:
   port: 8080
 
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client_id: 1068264261400-qv0d6bqncnbum707dv7n6nig3ucbvhot.apps.googleusercontent.com
+            client_secret: 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
+            scope:
+              - email
+              - profile
+              -
   datasource:
-    url: jdbc:mysql://localhost:3306/yogoyogu?useSSL=false&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/test?useSSL=false&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
     username: root
-    password: root
+    password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: false
@@ -27,53 +38,5 @@ spring:
   servlet.multipart.max-file-size: 5MB
   servlet.multipart.max-request-size: 5MB
 
-#spring:
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: ${DB_URL:jdbc:mysql://localhost:3306/test?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8}
-#    username: ${DB_USERNAME:root}
-#    password: ${DB_PASSWORD:1234}
-#
-#
-#  jpa:
-#    open-in-view: true
-#    hibernate:
-#      ddl-auto: create
-#      naming:
-#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-##      use-new-id-generator-mappings: false
-#    show-sql: true
-#    properties:
-#      hibernate.format_sql: true
-#      dialect: org.hibernate.dialect.MySQL8InnoDBDialect
-#
-#
-#logging:
-#  level:
-#    org.hibernate.SQL: debug
-
-
-#spring:
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: ${DB_URL:jdbc:mysql://db:3306/test?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8}
-#    username: ${DB_USERNAME:root}
-#    password: ${DB_PASSWORD:1234}
-#
-#  jpa:
-#    open-in-view: true
-#    hibernate:
-#      ddl-auto: update
-#      naming:
-#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-#    show-sql: true
-#    properties:
-#      hibernate.format_sql: true
-#      dialect: org.hibernate.dialect.MySQL8InnoDBDialect
-#
-#logging:
-#  level:
-#    org.hibernate.SQL: debug
-
-
-
+jwt:
+  key: vepvmiemvpmerimepoirmepoirmopervmepoirmvioemrvopiemrvoipemrvipoemrvoperopeovrpervoiemoimerpovmervpmio

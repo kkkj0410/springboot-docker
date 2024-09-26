@@ -49,34 +49,22 @@ public class MemberController {
     }
 
 
+//    @GetMapping("/login")
+//    public String login(Model model)
+//    {
+//        log.info("로그인 창 접속");
+//        model.addAttribute("member", new Member());
+//        return "members/login";
+//    }
+
+
     @GetMapping("/login")
     public String login(Model model)
     {
         log.info("로그인 창 접속");
         model.addAttribute("member", new Member());
-        return "members/login";
+        return "redirect:/oauth2/authorization/google";
     }
-
-//    @PostMapping("/login")
-//    public String login(@Valid @ModelAttribute Member member,
-//                        HttpServletRequest request,
-//                        @RequestParam(defaultValue = "/") String redirectURL)
-//    {
-//        Member findMember = memberRepository.Login(member.getLoginId(), member.getName());
-//        if(findMember == null)
-//        {
-//            log.info("회원 가입 실패 : {}", member);
-//            log.info("회원 가입 실패 이름 : {}", member.getName());
-//            return "redirect:/members/new-form";
-//        }
-//
-//        HttpSession session = request.getSession(true);
-//
-//        session.setAttribute(SessionConst.LOG_KEY, findMember);
-//
-//        log.info("회원 가입 성공 : {}", findMember);
-//        return "redirect:" + redirectURL;
-//    }
 
     @PostMapping("/login")
     public String login(@RequestParam String loginId, @RequestParam String name,
