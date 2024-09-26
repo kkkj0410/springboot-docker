@@ -30,7 +30,7 @@ public class MemberController {
     public String newForm(Model model)
     {
         model.addAttribute("member", new Member());
-        return "/members/new-form";
+        return "members/new-form";
     }
 
 //    @PostMapping("/new-form")
